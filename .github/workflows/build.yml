@@ -17,8 +17,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: "3.12"
       - run: pip install -e ".[dev]"
@@ -39,8 +39,8 @@ jobs:
             file: AWATO.sh
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7.0.0
         with:
           python-version: "3.12"
       - run: pip install -e ".[build]"
@@ -48,7 +48,7 @@ jobs:
       - name: Smoke test the packaged game
         shell: bash
         run: dist/${{ matrix.file }} --self-test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.file }}
           path: dist/${{ matrix.file }}
@@ -61,7 +61,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: dist
           merge-multiple: true
