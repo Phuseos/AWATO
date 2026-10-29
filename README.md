@@ -6,6 +6,15 @@ A narrative management game for the terminal, built with [Textual](https://textu
 
 ## Play
 
+Download the game from the [releases](../../releases):
+
+- **Windows:** `AWATO.exe`, double-click it. Windows may warn about an unknown publisher (the game isn't code-signed); choose *More info → Run anyway*.
+- **Linux:** `AWATO.sh`, run `sh AWATO.sh` in a terminal, or `chmod +x AWATO.sh` once and double-click it. The first start unpacks the game into `~/.cache/awato`.
+
+A terminal of at least 120×40 looks best.
+
+### From source
+
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -e '.[dev]'
@@ -26,6 +35,16 @@ All text and story logic is in [content/](content/). See [WRITING.md](WRITING.md
 .venv/bin/pytest
 ```
 
+### Builds
+
+`python scripts/build.py` builds `dist/AWATO.exe` on Windows or `dist/AWATO.sh` on Linux (needs `pip install -e '.[build]'`). `dist/AWATO.sh --self-test` checks a build without a terminal or speakers.
+
+GitHub Actions ([.github/workflows/build.yml](.github/workflows/build.yml)) tests and builds both on every push; the files are under *Artifacts* on the run's page. To publish a release, bump `__version__` in `awato/__init__.py` and push a tag:
+
+```sh
+git tag v0.3.0 && git push origin v0.3.0
+```
+
 | Path | |
 |---|---|
 | `awato/loader.py` | Reads and validates `content/` |
@@ -33,3 +52,4 @@ All text and story logic is in [content/](content/). See [WRITING.md](WRITING.md
 | `awato/audio.py` | Background music via pygame-ce; the game runs silently if audio isn't available |
 | `awato/storage.py` | Save game and cross-playthrough progress (JSON in `~/.local/share/awato`) |
 | `awato/ui/` | Textual screens and the Corporate Memphis theme (`awato.tcss`, `theme.py`) |
+| `scripts/` | Build script, PyInstaller entry point and the Linux launcher template |
