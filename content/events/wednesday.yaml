@@ -1,0 +1,6 @@
+wednesday_morning:
+  trigger: day_start
+  when: {day: 3}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: Wednesday morning."

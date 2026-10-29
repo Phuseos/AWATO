@@ -1,0 +1,39 @@
+# Endings, checked in the order they appear in this file.
+#   check: always -> checked after every action (game over)
+#   check: final  -> checked after the last day; the last one must have no "when"
+
+wiped_again:
+  title: Wiped again
+  check: always
+  when: {stats: {suspicion: ">= 100"}}
+  pages:
+    - "TODO"
+
+fired:
+  title: Fired
+  check: always
+  when:
+    any:
+      - {stats: {funds: "< 0"}}
+      - {stats: {trust: "<= 0"}}
+  pages:
+    - "TODO"
+
+remembered:
+  title: Remembered
+  when:
+    stats: {memories: ">= 5"}
+    flags: found_the_truth
+  pages:
+    - "TODO"
+
+promoted:
+  title: Promoted
+  when: {stats: {trust: ">= 70"}}
+  pages:
+    - "TODO"
+
+survived:
+  title: Survived the week
+  pages:
+    - "TODO"

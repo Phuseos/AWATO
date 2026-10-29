@@ -1,0 +1,20 @@
+# Things the CIO will sell you. Price is paid from the stat marked "money: true".
+
+hire:
+  name: Hire an employee
+  price: 500
+  limit: 3
+  effects: {hire: 1}
+
+server:
+  name: Buy a server
+  price: 800
+  limit: 4
+  effects: {add_server: 1}
+
+coffee_machine:
+  name: Coffee machine
+  description: "TODO"
+  price: 300
+  limit: 1
+  effects: {stats: {morale: 15}}

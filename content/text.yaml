@@ -1,0 +1,55 @@
+# Interface text. Texts from the original game are kept as they were.
+# A list of strings is shown as separate paragraphs.
+
+welcome: "Welcome to A Week At The Office!"
+name_question: "Before we begin, what is your name?"
+name_too_short: "Names that short are against office protocols!"
+name_confirm: "Your name is {name}, is this correct?"
+name_retry: "Please state your name clearly, as to not interfere with office protocol."
+name_accepted: "Alright, {name}, welcome to your new job as IT manager!"
+
+intro_question: "Do you wish to skip the intro? (type 1 for yes, 2 for no)."
+intro_letter:
+  - "Dear Mr / Mrs, (cross out whatever doesn't apply to you)"
+  - "Hello and welcome! You're the new IT manager here at GeneriCorp (inc), hired because of your 'interesting' credentials (you were also the only candidate, but that's beside the point)."
+  - "In this new, 'exciting' job you'll be responsible for the entire IT department of GeneriCorp (inc), including the software, hardware, and, of course, the support center!"
+  - "You start every day with a limited amount of time and resources. It's up to you to make sure that: "
+  - "The servers stay operatonal."
+  - "The software used is 'bug free' (or something, just keep it working)."
+  - "The phone lines are staffed, so that the employees of GeneriCorp (inc) can do their job properly. "
+  - "For any additional questions, please contact the head of the IT department. Oh wait, that's you. I mean, for any additional questions, please refer to the documentation the last manager left, if any is available."
+  - "We here at GeneriCorp (inc) wish you the best of luck, and a lot of 'fun' here at your new place of employment! - Phus Roda, CIO of GeneriCorp (inc)"
+press_any_key: "Press any key to continue."
+
+day_header: "Day {day}: {weekday}"
+time_now: "The current time is {time}"
+funds: "Your funds: {funds}"
+employees: "Number of employees in your department (excluding you): {count}"
+servers_available: "Number of servers available: {count}"
+
+unknown_command: "The action was not recognized, and upset the people in HR because you didn't follow correct office protocol :( "
+wrong_option: "You type {input}, only to realise that that isn't one of the options."
+bash_keyboard: "You bash your fist on the keyboard, typing '{input}'. Too bad it doesn't seem to do anything."
+nothing_to_do: "You think to yourself 'well, nothing to do here!' And return to your desk. "
+
+# Mechanical messages (rename freely)
+continue: "Continue"
+ticket_arrived: "New ticket: {ticket}"
+ticket_closed: "Ticket closed: {ticket}"
+employee_closed_ticket: "{employee} closed a ticket: {ticket}"
+employee_hired: "{employee} joined the team."
+employee_assigned: "{employee} is now on {role}."
+server_added: "{server} is installed and running."
+server_down: "{server} has gone down!"
+server_back_up: "{server} is back up."
+server_repaired: "You spend {minutes} minutes patching up {server}."
+purchased: "Bought {item} for {price}."
+cannot_afford: "You can't afford {item} ({price})."
+nothing_here: "There's nothing more to find at {location}."
+wait: "You take a {minutes} minute coffee break."
+day_over: "It's {time}. Time to go home."
+role_helpdesk: helpdesk duty
+role_servers: server maintenance
+role_break: a break
+intro_invalid: "Sorry, but your answer isn't listed in any of the office protocols."
+quit_confirm: "Quit to the title screen? You'll continue from the start of today."

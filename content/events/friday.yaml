@@ -1,0 +1,19 @@
+friday_morning:
+  trigger: day_start
+  when: {day: 5}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: Friday morning, the audit is today."
+
+friday_audit:
+  trigger: auto
+  when: {day: 5, after: "15:00"}
+  priority: 10
+  pages:
+    - "TODO: the audit."
+  choices:
+    - text: "TODO: cooperate"
+      effects: {stats: {trust: 20}}
+    - text: "TODO: refuse"
+      when: {flags: found_the_truth}
+      effects: {stats: {suspicion: 100}}   # Triggers the 'wiped_again' ending

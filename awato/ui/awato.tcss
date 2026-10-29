@@ -1,0 +1,192 @@
+/* Corporate Memphis: flat colour blocks, round corners, lots of air. */
+
+Screen {
+    background: $background;
+}
+
+TitleScreen, NameScreen, IntroScreen, EndingScreen {
+    layers: backdrop content;
+}
+
+.backdrop {
+    layer: backdrop;
+}
+
+.card {
+    background: $surface;
+    border: round $primary 50%;
+    padding: 1 2;
+}
+
+.pill {
+    width: auto;
+    height: 1;
+    padding: 0 2;
+    margin-bottom: 1;
+    color: #FFFFFF;
+    text-style: bold;
+}
+
+.muted { color: $foreground 60%; }
+.center { width: 100%; content-align: center middle; }
+.notice { height: auto; margin-top: 1; }
+.hint { color: $foreground 50%; margin-top: 1; }
+.paragraph { margin-bottom: 1; }
+.question { margin-bottom: 1; }
+
+/* ---- buttons: flat blocks in the palette ---- */
+
+Button {
+    border: none;
+    height: 3;
+    min-width: 12;
+    margin: 0 1 1 0;
+    text-style: bold;
+}
+Button.violet { background: #6C4CF1; color: #FFFFFF; }
+Button.coral  { background: #FF7A59; color: #FFFFFF; }
+Button.mint   { background: #17BFA0; color: #FFFFFF; }
+Button.sun    { background: #FFC23D; color: #2D2A4A; }
+Button.sky    { background: #4DA8FF; color: #FFFFFF; }
+Button.pink   { background: #FF8FC7; color: #2D2A4A; }
+Button.ink    { background: $foreground; color: $background; }
+Button:hover  { background-tint: $foreground 8%; }
+Button:focus  { text-style: bold underline; background-tint: $foreground 12%; }
+
+Button.choice {
+    width: 100%;
+    height: auto;
+    min-height: 3;
+    padding: 1 2;
+    margin: 0 0 1 0;
+    content-align: left middle;
+    text-align: left;
+    background: $panel;
+    color: $foreground;
+}
+Button.choice:focus { background: $primary; color: #FFFFFF; text-style: bold; background-tint: $primary 0%; }
+Button.choice:disabled { color: $foreground 40%; }
+
+.button-row { height: auto; }
+
+/* ---- title, name, intro, ending ---- */
+
+TitleScreen, NameScreen, IntroScreen, EndingScreen {
+    align: center middle;
+}
+
+#title-card, #name-card, #intro-card, #ending-card {
+    layer: content;
+    width: 72;
+    max-width: 95%;
+    height: auto;
+    max-height: 90%;
+    padding: 2 4;
+    border: round $primary;
+}
+
+.kicker { color: #FF7A59; }
+
+#game-title {
+    text-style: bold;
+    color: $primary;
+    margin: 1 0;
+    padding: 1 2;
+    background: $panel;
+    content-align: center middle;
+    width: 100%;
+}
+
+#title-buttons { height: auto; margin-top: 1; }
+#title-buttons Button { width: 100%; }
+
+#name-input { margin-bottom: 1; border: round $primary; }
+#confirm-buttons { height: auto; margin-top: 1; }
+
+#letter { height: auto; max-height: 24; }
+#ending-text { height: auto; max-height: 20; margin-bottom: 1; }
+
+/* ---- the office ---- */
+
+#topbar {
+    height: 3;
+    background: #6C4CF1;
+    color: #FFFFFF;
+    padding: 1 2;
+}
+#brand { width: 1fr; }
+#day-pill  { background: #FF7A59; margin: 0 0 0 1; }
+#time-pill { background: #FFC23D; color: #2D2A4A; margin: 0 0 0 1; }
+
+#body { height: 1fr; padding: 1 1 0 1; }
+#body .card { margin: 0 1 1 0; padding: 0 1; }
+
+#left  { width: 40; }
+#right { width: 34; }
+#center { width: 1fr; }
+.narrow #left  { width: 32; }
+.narrow #right { width: 28; }
+
+#inbox-card { height: 3fr; }
+#servers-card { height: 2fr; }
+#stats-card { height: auto; }
+#team-card { height: 1fr; }
+
+.card-title {
+    width: auto;
+    padding: 0 1;
+    margin: 1 0 1 0;
+    color: #FFFFFF;
+    text-style: bold;
+}
+.coral-bg  { background: #FF7A59; }
+.violet-bg { background: #6C4CF1; }
+.sun-bg    { background: #FFC23D; color: #2D2A4A; }
+.mint-bg   { background: #17BFA0; }
+.sky-bg    { background: #4DA8FF; }
+
+OptionList {
+    height: 1fr;
+    border: none;
+    background: $surface;
+    padding: 0;
+}
+OptionList:focus { border: none; background-tint: $primary 4%; }
+OptionList > .option-list--option-highlighted { background: $panel; color: $foreground; text-style: bold; }
+OptionList:focus > .option-list--option-highlighted { background: $primary 20%; }
+
+#stats { height: auto; margin-bottom: 1; }
+
+#log {
+    height: 1fr;
+    border: none;
+    background: $surface;
+    padding: 0 1 1 0;
+    scrollbar-size-vertical: 1;
+}
+
+#actions {
+    height: auto;
+    padding: 0 1;
+}
+#actions Button { width: 1fr; min-width: 8; padding: 0 1; }
+
+/* ---- modals ---- */
+
+ModalScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+.dialog {
+    width: 76;
+    max-width: 95%;
+    height: auto;
+    max-height: 90%;
+    border: round $primary;
+    padding: 1 3;
+}
+.dialog .body { margin-bottom: 1; }
+.dialog .choices { height: auto; }
+
+#summary { width: 56; }

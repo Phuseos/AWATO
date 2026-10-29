@@ -1,0 +1,21 @@
+tuesday_morning:
+  trigger: day_start
+  when: {day: 2}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: Tuesday morning."
+
+basement_first_visit:         # Played from locations.yaml (basement)
+  pages:
+    - "TODO: the basement."
+  choices:
+    - text: "TODO: look closer"
+      effects: {set: found_the_truth, stats: {memories: 3, suspicion: 20}, time: 30}
+    - text: "TODO: back upstairs"
+
+server_crash_example:         # Random event: 30% chance per action while a server is down
+  trigger: auto
+  when: {servers_down: ">= 1", chance: 0.3}
+  pages:
+    - "TODO: something about the server being down."
+  effects: {stats: {trust: -5}}

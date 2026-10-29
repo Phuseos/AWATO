@@ -1,0 +1,14 @@
+thursday_morning:
+  trigger: day_start
+  when: {day: 4}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: Thursday morning."
+  choices:
+    - text: "TODO: chained scene"
+      effects: {event: thursday_followup}   # Plays another event right after this one
+    - text: "TODO: skip it"
+
+thursday_followup:
+  pages:
+    - "TODO: follow-up scene."

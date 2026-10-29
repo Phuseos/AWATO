@@ -1,0 +1,22 @@
+# Places to visit ("explore" menu) and conversations ("cio" menu).
+# Visiting plays the first event in "events" that can still happen;
+# if there is none, the "empty" text is shown. Visiting always costs "time" minutes.
+
+old_desk:
+  name: "TODO: the previous manager's desk"
+  time: 30
+  events: [desk_first_look]
+  empty: "TODO: nothing left here"
+
+basement:
+  name: "TODO: the basement"
+  when: {flags: found_basement_key}
+  time: 60
+  events: [basement_first_visit]
+
+cio_chat:
+  name: "TODO: small talk with Phus Roda"
+  menu: cio
+  time: 15
+  events: [cio_chat_monday]
+  empty: "TODO: the CIO is busy"

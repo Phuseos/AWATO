@@ -1,0 +1,47 @@
+# Support tickets. Tickets with weight > 0 arrive at random during the day;
+# weight 0 tickets only appear through an "add_ticket" effect.
+
+# Picked at random for {quick_fix}
+quick_fix_texts:
+  - "You tell the user to 'Try and turn it off and on again'. You assume this worked and close the ticket."
+  - "You tell the user to check if all the cables are plugged in and close the ticket."
+  - "You type up some random technobable and close the ticket."
+  - "You tell the user to delete system32 and then get back to you. After that you close the ticket."
+  - "You tell the user that they should've followed the office protocol, and close the ticket."
+
+# Used by every ticket that doesn't list its own choices
+default_choices:
+  - text: Fix it properly (1 hour)
+    effects: {time: 60, stats: {trust: 2}}
+  - text: Quick fix (15 minutes)
+    result: "{quick_fix}"
+    effects: {time: 15, stats: {trust: -1}}
+  - text: Ignore the tickets and go back to your desk
+    close: false
+
+tickets:
+  haunted:
+    text: "My computer is haunted! Please send an exorsist!"
+  puns:
+    text: "My computer keeps shouting puns at me, please fix it!"
+  mouse_lunch:
+    text: "My mouse ate my lunch! Can you send another?"
+  unplugged:
+    text: "I unplugged all the cables and now the computer doesn't work, please help!"
+  on_fire:
+    text: "Is my computer supposed to be on fire? Please help ASAP, it's getting too hot to work."
+    urgent: true
+  not_working:
+    text: "It's not working! I've tried nothing and I'm all out of ideas!"
+
+  # Example of a story ticket: never random, can't be closed by employees, own choices.
+  story_example:
+    text: "TODO: a ticket that is secretly part of the story"
+    weight: 0
+    delegable: false
+    choices:
+      - text: "TODO: investigate"
+        result: "TODO"
+        effects: {time: 30, set: story_example_done}
+      - text: Ignore it for now
+        close: false

@@ -1,0 +1,43 @@
+# Game rules and starting values. See WRITING.md for what every key does.
+
+title: A Week At The Office
+weekdays: [Monday, Tuesday, Wednesday, Thursday, Friday]
+day_start: "9:00"
+day_end: "17:00"
+clock: 12h            # 12h (9:00 AM) or 24h (09:00)
+typewriter_cps: 60    # Dialogue reveal speed in characters per second, 0 = instant
+
+# Every stat can be used in conditions ("stats: {trust: '>= 50'}"),
+# effects ("stats: {trust: -5}") and text ("{trust}").
+stats:
+  funds:     {label: "Your funds", start: 1000, money: true}
+  morale:    {label: Morale, start: 60, min: 0, max: 100, bar: true}
+  trust:     {label: CIO trust, start: 50, min: 0, max: 100, bar: true}
+  suspicion: {label: Suspicion, start: 0, min: 0, max: 100, bar: true}
+  memories:  {label: Memories, start: 0, min: 0, max: 5, bar: true}
+  bugs:      {label: Known bugs, start: 0, min: 0, hidden: true}
+
+servers:
+  start: [SRV-01]
+  names: [SRV-02, SRV-03, SRV-04, SRV-05]   # Used when a server is bought
+  decay_per_hour: [0, 8]                    # Each hour every server loses this much health (random in range)
+  repair_minutes: 60
+  repair_amount: 50
+  down_penalty:                             # Applied every hour, per server that is down
+    stats: {trust: -2}
+
+team:
+  start:
+    - {name: Employee 1, role: helpdesk}    # TODO: name your first employee
+  names: []                                 # Names for new hires, used in order
+  helpdesk_chance: 0.5                      # Chance per hour that a helpdesk employee closes a ticket
+  server_repair_per_hour: 15
+  break_effects:                            # Applied every hour, per employee on break
+    stats: {morale: 2}
+
+tickets:
+  start: [not_working]   # Start with ticket 5 because it's my favorite so far
+  per_hour: [0, 1]       # Random new tickets each hour
+  per_down_server: 1     # Extra tickets each hour, per server that is down
+  overnight_penalty:     # Applied at the end of each day, per open ticket
+    stats: {trust: -3}

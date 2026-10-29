@@ -1,0 +1,51 @@
+# Monday. Every event here is a placeholder that shows one engine feature;
+# replace the TODO texts and reshape the events however you like.
+
+monday_morning:               # Plays when Monday starts
+  trigger: day_start
+  when: {day: 1}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: Monday morning welcome."
+    - speaker: Phus Roda
+      text: "TODO: second page, {name}."
+  choices:
+    - text: "TODO: friendly answer"
+      result: "TODO"
+      effects: {stats: {trust: 5}}
+    - text: "TODO: suspicious answer"
+      result: "TODO"
+      effects: {stats: {trust: -5, suspicion: 5}, set: asked_questions}
+
+monday_lunch:                 # Plays as soon as it's past noon on Monday
+  trigger: auto
+  when: {day: 1, after: "12:00"}
+  pages:
+    - "TODO: lunch scene (an event without choices gets a Continue button)"
+  effects: {add_ticket: story_example}
+
+monday_evening:               # Plays when the clock hits 5 PM on Monday
+  trigger: day_end
+  when: {day: 1}
+  pages:
+    - "TODO: end of Monday."
+    - text: "TODO: only some players see the next choice."
+  choices:
+    - text: "TODO: choice shown only if you asked questions this morning"
+      when: {flags: asked_questions}
+      effects: {stats: {memories: 1}}
+    - text: "TODO: go home"
+
+desk_first_look:              # Played from locations.yaml (old_desk)
+  pages:
+    - "TODO: what you find at the desk."
+  choices:
+    - text: "TODO: take the key"
+      effects: {set: found_basement_key, stats: {suspicion: 10, memories: 1}}
+    - text: "TODO: leave it"
+
+cio_chat_monday:              # Played from locations.yaml (cio_chat)
+  when: {day: 1}
+  pages:
+    - speaker: Phus Roda
+      text: "TODO: chat with the CIO."
