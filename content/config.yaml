@@ -7,6 +7,10 @@ day_end: "17:00"
 clock: 12h            # 12h (9:00 AM) or 24h (09:00)
 typewriter_cps: 60    # Dialogue reveal speed in characters per second, 0 = instant
 
+music:
+  theme: music/main_theme.mp3   # Loops during the whole game; path is relative to content/
+  volume: 0.4                   # 0 to 1
+
 # Every stat can be used in conditions ("stats: {trust: '>= 50'}"),
 # effects ("stats: {trust: -5}") and text ("{trust}").
 stats:

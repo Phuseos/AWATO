@@ -66,3 +66,11 @@ def test_yaml_syntax_error_is_reported(content_copy):
 def test_check_command(capsys):
     assert main(["--check"]) == 0
     assert "0 error(s)" in capsys.readouterr().out
+
+
+def test_missing_music_file_is_a_warning(content_copy):
+    root, patch = content_copy
+    patch("config.yaml", lambda d: d["music"].update(theme="music/nope.mp3"))
+    content = load_content(root, strict=False)
+    assert content.music_path is None
+    assert any("nope.mp3" in str(p) and p.level == "warning" for p in content.problems)

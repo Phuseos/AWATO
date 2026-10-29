@@ -3,7 +3,7 @@ name = "awato"
 version = "0.2.0"
 description = "A Week At The Office: a narrative IT-management game for the terminal"
 requires-python = ">=3.11"
-dependencies = ["textual>=8.2", "pyyaml>=6.0"]
+dependencies = ["textual>=8.2", "pyyaml>=6.0", "pygame-ce>=2.5"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]

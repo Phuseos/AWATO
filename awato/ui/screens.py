@@ -163,6 +163,8 @@ class IntroScreen(Screen):
         letter.focus()
 
     def on_key(self, event):
+        if self.app.is_app_key(event.key):
+            return
         event.stop()
         event.prevent_default()
         if self.reading:
@@ -306,7 +308,8 @@ class OfficeScreen(Screen):
 
     def on_key(self, event):
         bound = {b.key for b in self.BINDINGS}
-        if event.is_printable and event.character and event.key not in bound and event.character.strip():
+        if event.is_printable and event.character and event.key not in bound and event.character.strip() \
+                and not self.app.is_app_key(event.key):
             self.write_log([_line("bad", self.app.content.t("unknown_command"))])
 
     # -- actions --
@@ -474,7 +477,7 @@ class MenuScreen(ModalScreen):
                 self.dismiss(self.options[index][0])
             else:
                 self._invalid(event.character)
-        elif event.is_printable and event.character and event.character.strip():
+        elif event.is_printable and event.character and event.character.strip() and not self.app.is_app_key(event.key):
             event.stop()
             event.prevent_default()
             self._invalid(event.character)
@@ -585,7 +588,7 @@ class DialogueScreen(ModalScreen):
                 self.dismiss(self.scene.choices[index][0])
             else:
                 self._invalid(event.character)
-        elif event.is_printable and event.character and event.character.strip():
+        elif event.is_printable and event.character and event.character.strip() and not self.app.is_app_key(event.key):
             event.stop()
             event.prevent_default()
             self._invalid(event.character)

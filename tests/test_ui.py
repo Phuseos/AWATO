@@ -6,7 +6,7 @@ from awato.ui.screens import DaySummaryScreen, DialogueScreen, EndingScreen, Int
 
 def run(content, script, size=(140, 42), save=False):
     content.typewriter_cps = 0
-    app = AwatoApp(content, seed=1, save=save)
+    app = AwatoApp(content, seed=1, save=save, music=False)
 
     async def go():
         async with app.run_test(size=size) as pilot:
@@ -137,3 +137,17 @@ def test_continue_from_save(content):
 
     run(content, first, save=True)
     run(content, second, save=True)
+
+
+def test_m_key_toggles_music_but_still_types_in_names(content):
+    async def script(app, pilot):
+        await pilot.press("n", *"Tom", "enter")
+        await pilot.pause()
+        assert app.screen.pending == "Tom"
+        await pilot.press("y", "1")
+        await pilot.pause()
+        await pilot.press("enter", "1", "m")
+        await pilot.pause()
+        log = "\n".join(str(line.text) for line in app.screen.query_one("#log").lines)
+        assert "upset the people in HR" not in log
+    run(content, script)

@@ -27,6 +27,7 @@ def main(argv=None):
     parser.add_argument("--check", action="store_true", help="validate the content files and exit")
     parser.add_argument("--content", type=Path, default=DEFAULT_CONTENT_DIR, help="content folder (default: %(default)s)")
     parser.add_argument("--seed", type=int, help="random seed, for reproducible playthroughs")
+    parser.add_argument("--no-music", action="store_true", help="start without background music")
     args = parser.parse_args(argv)
 
     if args.check:
@@ -40,7 +41,7 @@ def main(argv=None):
         return 1
 
     from .ui.app import AwatoApp
-    AwatoApp(content, seed=args.seed).run()
+    AwatoApp(content, seed=args.seed, music=not args.no_music).run()
     return 0
 
 

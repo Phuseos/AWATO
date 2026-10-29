@@ -145,6 +145,8 @@ class Content:
     day_end: int
     clock_24h: bool
     typewriter_cps: int
+    music_path: Path | None
+    music_volume: float
     stats: dict[str, StatDef]
     servers: dict
     team: dict
@@ -395,7 +397,7 @@ class _Loader:
         endings_file = self.read("endings.yaml")
 
         self.check_keys("config.yaml", config, {
-            "title", "weekdays", "day_start", "day_end", "clock", "typewriter_cps", "stats", "servers", "team", "tickets",
+            "title", "weekdays", "day_start", "day_end", "clock", "typewriter_cps", "music", "stats", "servers", "team", "tickets",
         })
         stats = self.load_stats(config.get("stats") or {})
         self.stat_ids = set(stats)
@@ -413,6 +415,7 @@ class _Loader:
         servers = self.load_servers(config.get("servers") or {})
         team = self.load_team(config.get("team") or {})
         ticket_rules = self.load_ticket_rules(config.get("tickets") or {})
+        music_path, music_volume = self.load_music(config.get("music") or {})
 
         for key, value in text.items():
             self.text(f"text.yaml › {key}", value, CONTEXT_PLACEHOLDERS)
@@ -434,6 +437,8 @@ class _Loader:
             day_end=day_end,
             clock_24h=str(config.get("clock", "12h")) == "24h",
             typewriter_cps=self.get_int("config.yaml", config, "typewriter_cps", 60) or 0,
+            music_path=music_path,
+            music_volume=music_volume,
             stats=stats,
             servers=servers,
             team=team,
@@ -476,6 +481,21 @@ class _Loader:
         if sum(s.money for s in stats.values()) > 1:
             self.error("config.yaml › stats", "only one stat can have 'money: true'")
         return stats
+
+    def load_music(self, raw):
+        w = "config.yaml › music"
+        self.check_keys(w, raw, {"theme", "volume"})
+        path = None
+        if raw.get("theme"):
+            path = self.root / str(raw["theme"])
+            if not path.is_file():
+                self.warn(f"{w} › theme", f"'{raw['theme']}' not found, the game will be silent")
+                path = None
+        volume = raw.get("volume", 0.5)
+        if isinstance(volume, bool) or not isinstance(volume, (int, float)) or not 0 <= volume <= 1:
+            self.error(f"{w} › volume", "must be a number between 0 and 1")
+            volume = 0.5
+        return path, float(volume)
 
     def load_servers(self, raw):
         w = "config.yaml › servers"

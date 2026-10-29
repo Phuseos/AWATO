@@ -8,6 +8,7 @@ from textual.app import App
 from textual.binding import Binding
 
 from .. import storage
+from ..audio import Music
 from ..engine import Engine
 from ..loader import Content
 from .screens import DaySummaryScreen, DialogueScreen, EndingScreen, IntroScreen, OfficeScreen, TitleScreen
@@ -17,14 +18,20 @@ from .theme import MEMPHIS, MEMPHIS_NIGHT
 class AwatoApp(App):
     CSS_PATH = "awato.tcss"
     TITLE = "A Week At The Office"
-    BINDINGS = [Binding("ctrl+t", "toggle_theme", "Day/night theme", show=False)]
+    BINDINGS = [
+        Binding("m", "toggle_music", "Music"),
+        Binding("ctrl+t", "toggle_theme", "Day/night theme", show=False),
+    ]
 
-    def __init__(self, content: Content, seed=None, save=True):
+    def __init__(self, content: Content, seed=None, save=True, music=True):
         super().__init__()
         self.content = content
         self.seed = seed
         self.save = save  # Tests turn saving off
         self.meta = storage.load_meta() if save else storage.Meta()
+        self.settings = storage.load_settings() if save else {}
+        self.music_enabled = music
+        self.music: Music | None = None
         self.engine: Engine | None = None
         self.title = content.title
 
@@ -32,7 +39,29 @@ class AwatoApp(App):
         self.register_theme(MEMPHIS)
         self.register_theme(MEMPHIS_NIGHT)
         self.theme = "memphis"
+        self.music = Music(self.content.music_path if self.music_enabled else None, self.content.music_volume,
+                           enabled=not self.settings.get("music_muted", False))
+        self.music.start()
         self.push_screen(TitleScreen())
+
+    def on_unmount(self):
+        if self.music:
+            self.music.stop()
+
+    def is_app_key(self, key):
+        """Keys the screens must leave alone so the app-wide bindings work everywhere."""
+        return any(key in b.key.split(",") for b in self.BINDINGS)
+
+    def action_toggle_music(self):
+        if not self.music.available:
+            reason = f": {self.music.error}" if self.music.error else ""
+            self.notify(f"Music isn't available{reason}", severity="warning")
+            return
+        muted = self.music.toggle_mute()
+        self.notify("Music off" if muted else "Music on", timeout=1.5)
+        self.settings["music_muted"] = muted
+        if self.save:
+            storage.save_settings(self.settings)
 
     def action_toggle_theme(self):
         self.theme = "memphis-night" if self.theme == "memphis" else "memphis"

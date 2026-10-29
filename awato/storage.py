@@ -61,3 +61,11 @@ def load_meta() -> Meta:
 
 def save_meta(meta: Meta):
     _write("meta.json", asdict(meta))
+
+
+def load_settings() -> dict:
+    return _read("settings.json") or {}
+
+
+def save_settings(settings: dict):
+    _write("settings.json", settings)

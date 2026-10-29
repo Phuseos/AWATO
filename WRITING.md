@@ -16,7 +16,8 @@ After every edit, run the checker. It lists mistakes with the file and the path 
 
 | File | What's in it |
 |---|---|
-| `config.yaml` | Days, clock, stats, starting servers, team and tickets, balancing numbers |
+| `config.yaml` | Days, clock, music, stats, starting servers, team and tickets, balancing numbers |
+| `music/` | Music files. The theme is set in `config.yaml` under `music:` (MP3, OGG or WAV) |
 | `text.yaml` | Every interface text: name prompt, intro letter, HR messages, log messages |
 | `events/*.yaml` | Story scenes. One file per day is just a convention; any `.yaml` in this folder is loaded |
 | `tickets.yaml` | Support tickets, the quick-fix texts and the default ticket choices |
